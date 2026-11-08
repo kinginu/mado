@@ -1,0 +1,1 @@
+{"hooks":{"PreToolUse":[{"matcher":"Edit|Write|NotebookEdit","hooks":[{"type":"command","command":"/usr/local/bin/mado","args":["guard-tool","--enforce","edits"],"timeout":10}]}]}}

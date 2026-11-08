@@ -1,0 +1,8 @@
+{
+  "ok": true,
+  "messages": [
+    {"type": "message", "user": "U02BBBBBB", "text": "hi <@U01AAAAAA|alice>, lunch?", "ts": "1792433400.000400"}
+  ],
+  "has_more": false,
+  "response_metadata": {"next_cursor": ""}
+}

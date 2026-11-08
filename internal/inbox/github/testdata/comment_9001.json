@@ -1,0 +1,10 @@
+{
+  "url": "{{API}}/repos/octo/mado/issues/comments/9001",
+  "html_url": "https://github.com/octo/mado/pull/42#issuecomment-9001",
+  "issue_url": "{{API}}/repos/octo/mado/issues/42",
+  "id": 9001,
+  "user": {"login": "bob", "id": 11, "type": "User"},
+  "created_at": "2026-10-19T09:59:00Z",
+  "updated_at": "2026-10-19T09:59:00Z",
+  "body": "@octo could you review this today?"
+}

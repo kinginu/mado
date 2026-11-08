@@ -1,0 +1,37 @@
+{
+  "ok": true,
+  "messages": [
+    {
+      "type": "message",
+      "user": "U02BBBBBB",
+      "text": "Anyone seen <#C01ABCDEF2|general> lately? &lt;3 &amp; thanks",
+      "ts": "1792433100.000300",
+      "thread_ts": "1792433100.000300",
+      "reply_count": 2,
+      "reply_users_count": 2,
+      "reply_users": ["U01AAAAAA", "U03CCCCCC"],
+      "latest_reply": "1792433220.000320",
+      "subscribed": true
+    },
+    {
+      "type": "message",
+      "user": "U01AAAAAA",
+      "text": "<!here> yes, in <#C01ABCDEF2>",
+      "ts": "1792433160.000310",
+      "thread_ts": "1792433100.000300",
+      "parent_user_id": "U02BBBBBB"
+    },
+    {
+      "type": "message",
+      "user": "U03CCCCCC",
+      "text": "mail <mailto:bob@example.com|bob@example.com> or <!subteam^S0TEAM01|@oncall>",
+      "ts": "1792433220.000320",
+      "thread_ts": "1792433100.000300",
+      "parent_user_id": "U02BBBBBB"
+    }
+  ],
+  "has_more": false,
+  "response_metadata": {
+    "next_cursor": ""
+  }
+}

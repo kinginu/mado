@@ -1,0 +1,89 @@
+{
+ "object": "list",
+ "data": [
+  {
+   "id": "deepseek-ai/deepseek-v4.1-flash-1017",
+   "name": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+   "object": "model",
+   "created": 1793327162,
+   "owned_by": "ai&",
+   "provider": "deepseek-ai",
+   "context_window": 1048576,
+   "max_output_tokens": 384000,
+   "capabilities": [
+    "chat",
+    "reasoning",
+    "vision",
+    "document",
+    "tool_calling"
+   ],
+   "reasoning_efforts": [
+    "none",
+    "high",
+    "max"
+   ],
+   "reasoning_effort_default": "high",
+   "description": "DeepSeek V4.1 Flash (1017) for economical reasoning, coding and long-context work",
+   "currency": "usd",
+   "input_per_1m": "0.300000",
+   "output_per_1m": "0.600000",
+   "cached_input_per_1m": "0.020000",
+   "deprecation_date": null
+  },
+  {
+   "id": "deepseek-ai/deepseek-v4.1-flash",
+   "name": "deepseek-ai/DeepSeek-V4.1-Flash",
+   "object": "model",
+   "created": 1790908611,
+   "owned_by": "ai&",
+   "provider": "deepseek-ai",
+   "context_window": 1048576,
+   "max_output_tokens": 384000,
+   "capabilities": [
+    "chat",
+    "vision",
+    "reasoning",
+    "tool_calling",
+    "document"
+   ],
+   "reasoning_efforts": [
+    "none",
+    "high",
+    "max"
+   ],
+   "reasoning_effort_default": "high",
+   "description": "DeepSeek V4.1 Flash lane for economical reasoning, coding and long-context work",
+   "currency": "usd",
+   "input_per_1m": "0.300000",
+   "output_per_1m": "0.600000",
+   "cached_input_per_1m": "0.020000",
+   "deprecation_date": "2026-11-05T15:00:00.000Z"
+  },
+  {
+   "id": "zai-org/glm-5.3",
+   "name": "zai-org/glm-5.3",
+   "object": "model",
+   "created": 1787960214,
+   "owned_by": "ai&",
+   "provider": "zai-org",
+   "context_window": 1048576,
+   "max_output_tokens": 131072,
+   "capabilities": [
+    "reasoning",
+    "tool_calling"
+   ],
+   "reasoning_efforts": [
+    "low",
+    "high",
+    "max"
+   ],
+   "reasoning_effort_default": "max",
+   "description": "Flagship GLM model for long-horizon coding, agents, and complex project delivery",
+   "currency": "usd",
+   "input_per_1m": "1.000000",
+   "output_per_1m": "4.000000",
+   "cached_input_per_1m": "0.300000",
+   "deprecation_date": null
+  }
+ ]
+}

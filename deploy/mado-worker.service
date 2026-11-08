@@ -1,0 +1,20 @@
+# systemd *user* unit. Installed by deploy/install-worker.sh into ~/.config/systemd/user/.
+[Unit]
+Description=mado worker (relays Claude Code sessions to the mado hub)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+ExecStart=%h/.local/bin/mado worker --config %h/.config/mado/worker.toml
+Restart=on-failure
+RestartSec=5
+# Sessions live in `tmux -L mado`, which the daemon starts through
+# `systemd-run --user --scope --unit mado-tmux` (DESIGN §8), i.e. outside this unit's cgroup.
+# So the default KillMode=control-group is safe: stopping or restarting the service never
+# kills a session. Stop the sessions themselves with `tmux -f /dev/null -L mado kill-server`.
+NoNewPrivileges=yes
+PrivateTmp=no
+
+[Install]
+WantedBy=default.target

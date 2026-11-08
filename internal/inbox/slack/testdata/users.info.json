@@ -1,0 +1,19 @@
+{
+  "U01AAAAAA": {
+    "ok": true,
+    "user": {
+      "id": "U01AAAAAA", "team_id": "T0123ABCD", "name": "alice.a", "deleted": false,
+      "real_name": "Alice Anderson", "tz": "Asia/Tokyo", "is_bot": false,
+      "profile": {"display_name": "alice", "real_name": "Alice Anderson", "real_name_normalized": "Alice Anderson", "display_name_normalized": "alice"}
+    }
+  },
+  "U02BBBBBB": {
+    "ok": true,
+    "user": {
+      "id": "U02BBBBBB", "team_id": "T0123ABCD", "name": "bob", "deleted": false,
+      "real_name": "Bob Builder", "is_bot": false,
+      "profile": {"display_name": "", "real_name": "Bob Builder"}
+    }
+  },
+  "U03CCCCCC": {"ok": false, "error": "user_not_found"}
+}

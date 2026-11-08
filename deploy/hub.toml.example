@@ -1,0 +1,261 @@
+# ~/.config/mado/hub.toml
+# Local mode: on a single computer, run `mado local` instead. It writes its own
+# hub.toml on the first run, and none of the [oidc] section below is needed for it.
+listen = "127.0.0.1:8740"                 # tailscale serve forwards https to this
+base_url = "https://hub.tailnet.ts.net"   # external URL; cookies are Secure when https
+db_path = "~/.local/share/mado/hub.db"
+secrets_file = "~/.config/mado/secrets.toml"   # mode 0600, see secrets.toml.example
+
+[oidc]
+issuer = "https://id.tailnet.ts.net"      # Pocket ID
+client_id = "mado"
+# In Pocket ID, set the client's allowed user groups to "mado_users" (who may log in at
+# all) plus "mado_admins". Users are created on their first login.
+# admin_group = "mado_admins"             # default; members are admins (profiles, enrollment, hub-wide audit)
+# scopes default to ["openid", "profile", "email", "groups"]
+# client_secret_file = "~/.config/mado/oidc-client-secret"   # omit for a public PKCE client
+# redirect_url defaults to base_url + "/callback"
+
+# Optional: when non-empty, only these users get in (on top of Pocket ID's allowed groups).
+# [allow]
+# subs = []
+# emails = ["you@example.org"]
+
+# The "subscription" profile (plain claude, normal login) always exists.
+
+[[profiles]]
+name = "glm-pair"
+kind = "router"
+main = "oc-strong"
+[profiles.aliases]
+fable = "oc-strong"
+opus = "oc-worker"
+sonnet = "oc-worker"
+haiku = "oc-small"
+# Optional role split (these are the defaults): the main model delegates through the Agent
+# tool to these agents; the aliases resolve through [profiles.aliases] above.
+[profiles.roles]
+enabled = true
+implementer = "opus"
+researcher = "opus"
+simple = "sonnet"
+prompt = ""                               # empty = mado's default delegation prompt
+enforce = "edits"                         # off | edits (main may not Edit/Write) | all (nor Bash)
+[profiles.upstreams.oc-strong]
+base_url = "http://gpu1:8000"
+model = "zai-org/GLM-5.1"
+key_ref = "gpu1"
+context_window = 202752                   # optional: CLAUDE_CODE_MAX_CONTEXT_TOKENS when this is the main model
+max_output = 32000                        # optional: CLAUDE_CODE_MAX_OUTPUT_TOKENS
+# kind = "anthropic"                      # default: the server speaks /v1/messages. "openai": a
+#                                         # chat-completions server (vLLM, Ollama, LM Studio,
+#                                         # llama.cpp); then base_url is the API root with
+#                                         # /chat/completions under it (http://gpu1:8000/v1),
+#                                         # key_ref is optional and sent as Bearer (DESIGN §22)
+# timeout_first_byte = "60s"              # default 60s; a cold prefill on a local server needs 180s
+# timeout_total = "10m"                   # default 10m (an anthropic upstream: no limit unless set)
+[profiles.upstreams.oc-worker]
+base_url = "http://gpu2:8000"
+model = "Qwen/Qwen3-Coder-480B"
+key_ref = "gpu2"
+[profiles.upstreams.oc-small]
+base_url = "http://gpu2:8001"
+model = "Qwen/Qwen3-8B"
+key_ref = "gpu2"
+
+# Plain chat on the hub (DESIGN §17): no worker, no claude process. Models are seeded
+# from here at every start; admins can add more at /profiles, and an entry saved there
+# overrides this file until "Revert to hub.toml" (DESIGN §28).
+[chat]
+enabled = true
+data_dir = "~/.local/share/mado/files"    # uploads and generated images, by sha256
+max_file_mb = 20                          # per upload
+user_quota_mb = 1024                      # per user, all files
+max_tool_rounds = 8                       # tool rounds per user message, then a notice
+
+# Tools (DESIGN §17.7, §17.12). Chat models get every enabled tool; code sessions get
+# web_search and fetch_url through the worker's mado MCP server. A tool whose backend is
+# unset is not offered. Keys stay on the hub.
+[chat.tools]
+# fetch = true                            # fetch_url (default on; it needs no backend)
+# fetch_max_chars = 20000                 # readable text per page, then truncated
+# allow_private = false                   # let fetch_url reach loopback, RFC 1918, CGNAT
+#                                         # (100.64/10, the tailnet), link-local and ULA hosts
+
+# web_search: one of
+# [chat.tools.search]
+# kind = "searxng"                        # GET {base_url}/search?q=&format=json (enable json in settings.yml)
+# base_url = "http://searxng.example.ts.net:8080"
+# allow_private = true                    # needed when SearXNG sits on the LAN or the tailnet
+#
+# [chat.tools.search]
+# kind = "brave"                          # Brave Search API, X-Subscription-Token
+# key_ref = "brave"
+
+# generate_image: kind = "none" (default) or "openai" (the Images API, b64 answers)
+# [chat.tools.image]
+# kind = "openai"
+# base_url = "https://api.openai.com"     # default
+# model = "gpt-image-1"                   # default; dall-e-3 and dall-e-2 work too
+# key_ref = "openai"
+# size = "1024x1024"                      # default when the model gives none
+# Price gpt-image-1 with a [[prices]] entry (its token counts land in usage), e.g.
+# [[prices]]
+# model = "gpt-image-1"
+# input = 5.0
+# output = 40.0
+
+[[chat.models]]
+name = "glm-5.3"                          # internal, [A-Za-z0-9._-]
+label = "GLM 5.3"                         # shown to users
+base_url = "https://api.aiand.com"
+model = "zai-org/glm-5.3"
+key_ref = "aiand"
+# auth_header = "bearer"                  # x-api-key is inferred for api.anthropic.com
+context_window = 1048576
+max_output = 32000                        # default 32000; keep it large for reasoning models
+vision = false                            # image blocks allowed
+# documents = false                       # native PDF blocks; defaults to the value of vision
+default = true                            # preselected in the form; the first entry otherwise
+
+[[chat.models]]
+name = "glm-5.3-flash"
+label = "GLM 5.3 Flash (vision)"
+base_url = "https://api.aiand.com"
+model = "zai-org/glm-5.3-flash"
+key_ref = "aiand"
+context_window = 1048550
+vision = true                             # AI& also takes PDFs as document blocks for it
+
+# An OpenAI-compatible server as a chat model (or as the [auto] classifier):
+# [[chat.models]]
+# name = "local-qwen"
+# kind = "openai"
+# base_url = "http://127.0.0.1:11434/v1"  # Ollama; vLLM: http://host:8000/v1
+# model = "qwen3:8b"
+# context_window = 32768                  # the server's limit
+# max_output = 8192
+# timeout_first_byte = "120s"             # PDFs go to it as extracted text (documents = false)
+
+# Money (DESIGN §17.6, §17.11). Prices and budgets are plain numbers in one currency (any
+# 3-letter code, default USD); mado converts nothing. Costs show as ¥1,234 for JPY, $1.23
+# for USD, "EUR 1.23" otherwise.
+[budgets]
+currency = "USD"
+# Monthly budget (UTC calendar month) of a user without their own (set on /admin/users).
+# At or above it, chat messages, new chats, router code sessions and messages into them
+# are refused; subscription sessions are exempt. Omitted: no limit.
+# default_monthly = 10.0
+
+# Prices in the [budgets] currency per million tokens, matched on the upstream's
+# message.model; a trailing `*` matches a prefix. Unknown models cost 0 (logged once).
+# Subscription sessions cost 0.
+# [[prices]]
+# model = "zai-org/glm-5.3"
+# input = 0.6
+# output = 2.2
+# cache_read = 0.1
+# cache_write = 0.75
+
+# mado auto mode (DESIGN §18). Permission mode `auto` on a router profile runs claude in
+# acceptEdits and lets the hub answer the other approval prompts: deny rules, allow
+# rules, then this classifier; what none of them settles goes to the user. Subscription
+# profiles keep Claude Code's own auto mode and are not affected.
+[auto]
+classifier = "glm-5.3-flash"             # a [[chat.models]] name; omit = rules only
+# allow = ['^git fetch( |$)']            # RE2, added to the defaults; matched on each command
+# deny = ['docker ']                     # RE2, added to the defaults; matched on the whole command or path
+
+# The concierge (DESIGN §20): a chat that prepares directories (mkdir, git init, clone,
+# worktree) and starts code sessions from a plan you approve. Optional.
+# [concierge]
+# model = "glm-5.3-flash"                # a [[chat.models]] name; omit = the chat default
+
+# The inbox (DESIGN §23): read-only collection of feeds, chat, mail and notifications
+# into mado, with scheduled digests and task proposals. Items are visible to the
+# account's owner only; accounts are edited by admins (here or on Inbox → Accounts).
+[inbox]
+enabled = false
+max_item_bytes = 65536                   # per item text
+retention_days = 90                      # read/archived items older than this are deleted
+
+[inbox.digest]
+executor = "claude"                      # claude (a job on a worker with jobs, chat as fallback) | chat
+model = ""                               # chat executor and fallback: a [[chat.models]] name; omit = the concierge model
+# machine = ""                           # claude executor: pin a worker; default: first online with `jobs`
+main_model = "sonnet"                    # claude executor: --model
+schedule = ["08:00", "20:00"]            # local times; [] = only "Digest now"
+timezone = "Asia/Tokyo"
+language = "ja"                          # the digest's language
+max_items = 400                          # per run; the rest waits for the next one
+max_bytes = 307200
+
+# Accounts from this file are read-only in the UI (source = config). owner is a user's
+# sub or e-mail; an e-mail is resolved when that user first logs in.
+[[inbox.accounts]]
+name = "x-ai"
+kind = "rss"                             # RSS/Atom/JSON Feed, e.g. an RSSHub route
+owner = "me@example.org"
+interval = "15m"                         # >= 1m
+[inbox.accounts.config]
+url = "http://home-twitter-rss.example.ts.net:1200/twitter/home_latest"
+allow_private = true                     # the SSRF guard refuses private/tailnet hosts otherwise
+
+# A push account: POST JSON to /api/inbox/ingest/<account id or name> with
+# "Authorization: Bearer <the secrets-file value of key_ref>" (at least 16 characters).
+# [[inbox.accounts]]
+# name = "angel"
+# kind = "push"
+# owner = "me@example.org"
+# key_ref = "angel_ingest"
+
+# A Slack workspace, read with a user token (xoxp-) of an app you create in that
+# workspace (README → Inbox: User Token Scopes channels:history, groups:history,
+# im:history, mpim:history, channels:read, groups:read, im:read, mpim:read, users:read).
+# Never writes to Slack.
+# [[inbox.accounts]]
+# name = "slack-myws"
+# kind = "slack"
+# owner = "me@example.org"
+# key_ref = "slack-myws"                 # [keys] slack-myws = "xoxp-…" in the secrets file
+# interval = "10m"
+# [inbox.accounts.config]
+# channels = ["C0123456789"]             # channel details → bottom of the About tab
+# dms = true                             # open DMs and group DMs
+# replies = true                         # thread replies (default true)
+# initial_hours = 24                     # first poll reaches back this far
+
+# A mail account (IMAP, read-only: no flags, no moves, no deletes). Gmail: turn on
+# 2-Step Verification, create an app password at https://myaccount.google.com/apppasswords
+# and put it in secrets.toml under [keys] as gmail_app_password = "abcdabcdabcdabcd".
+# Gmail labels are folders: "[Gmail]/Starred", "[Gmail]/All Mail", or a label's name.
+# [[inbox.accounts]]
+# name = "gmail"
+# kind = "imap"
+# owner = "me@example.org"
+# key_ref = "gmail_app_password"
+# interval = "10m"
+# [inbox.accounts.config]
+# host = "imap.gmail.com"
+# port = 993                             # implicit TLS; 143 only with starttls = true
+# username = "me@gmail.com"
+# folders = ["INBOX", "forwarded"]       # "forwarded": a label applied by a Gmail filter
+# initial_days = 7                       # first poll (and after a UIDVALIDITY change)
+# max_per_poll = 200                     # per folder per request; the rest follows at once
+
+# A github account (M19): your notifications, one item per thread update; nothing is
+# marked read. key_ref names a fine-grained PAT in secrets.toml with the account
+# permission "Notifications: Read-only" (plus repository Issues / Pull requests /
+# Contents: read for private repositories whose bodies should be fetched).
+# GitHub's X-Poll-Interval (usually 60 s) is honoured even if interval is shorter.
+# [[inbox.accounts]]
+# name = "github"
+# kind = "github"
+# owner = "me@example.org"
+# key_ref = "github_pat"
+# interval = "5m"
+# [inbox.accounts.config]
+# participating_only = false             # true: only threads you take part in (mention, review, assign, author, …)
+# fetch_bodies = true                    # fetch the issue/PR body and the latest comment (≤ 4 KiB each)
+# received_events = false                # deferred: true is rejected
+# initial_days = 7                       # first poll looks back this far

@@ -1,0 +1,16 @@
+# systemd *user* unit. Installed by deploy/install-hub.sh into ~/.config/systemd/user/.
+[Unit]
+Description=mado hub (web UI and worker endpoint)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+ExecStart=%h/.local/bin/mado hub --config %h/.config/mado/hub.toml
+Restart=on-failure
+RestartSec=5
+NoNewPrivileges=yes
+UMask=0077
+
+[Install]
+WantedBy=default.target

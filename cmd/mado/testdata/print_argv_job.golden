@@ -1,0 +1,29 @@
+{
+  "claude_bin": "/home/u/.local/bin/claude",
+  "cwd": "<job_dir>",
+  "args": [
+    "-p",
+    "--input-format",
+    "stream-json",
+    "--output-format",
+    "stream-json",
+    "--verbose",
+    "--permission-mode",
+    "default",
+    "--strict-mcp-config",
+    "--mcp-config",
+    "{\"mcpServers\":{\"mado\":{\"args\":[\"approve-tool\",\"--socket\",\"/run/user/1000/mado/S.sock\",\"--tools\",\"propose_task\"],\"command\":\"/usr/local/bin/mado\",\"type\":\"stdio\"}}}",
+    "--permission-prompt-tool",
+    "mcp__mado__approve",
+    "--tools",
+    "",
+    "--allowedTools",
+    "mcp__mado__propose_task",
+    "--max-turns",
+    "12",
+    "--model",
+    "sonnet",
+    "--append-system-prompt",
+    "You are mado's inbox summarizer."
+  ]
+}

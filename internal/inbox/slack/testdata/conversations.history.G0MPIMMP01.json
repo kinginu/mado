@@ -1,0 +1,8 @@
+{
+  "ok": true,
+  "messages": [
+    {"type": "message", "user": "U01AAAAAA", "text": "group plan: Friday", "ts": "1792433450.000450"}
+  ],
+  "has_more": false,
+  "response_metadata": {"next_cursor": ""}
+}

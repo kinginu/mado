@@ -1,0 +1,1 @@
+{"hooks":{"PreToolUse":[{"matcher":"Edit|Write|NotebookEdit|Bash|PowerShell","hooks":[{"type":"command","command":"/usr/local/bin/mado","args":["guard-tool","--enforce","all"],"timeout":10}]}]}}

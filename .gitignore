@@ -1,0 +1,4 @@
+bin/
+dist/
+.claude/
+/cmd/mado/mado

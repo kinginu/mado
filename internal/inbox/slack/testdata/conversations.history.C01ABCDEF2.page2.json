@@ -1,0 +1,51 @@
+{
+  "ok": true,
+  "messages": [
+    {
+      "type": "message",
+      "subtype": "bot_message",
+      "bot_id": "B0BOTBOT1",
+      "username": "ci-bot",
+      "text": "Build #12 passed",
+      "ts": "1792433000.000200",
+      "bot_profile": {"id": "B0BOTBOT1", "name": "CI", "app_id": "A0APPAPP1"}
+    },
+    {
+      "type": "message",
+      "user": "U01AAAAAA",
+      "text": "",
+      "ts": "1792432900.000100",
+      "files": [
+        {
+          "id": "F0FILEFIL1",
+          "name": "report.pdf",
+          "title": "Quarterly report",
+          "mimetype": "application/pdf",
+          "filetype": "pdf",
+          "size": 48213,
+          "url_private": "https://files.slack.com/files-pri/T0123ABCD-F0FILEFIL1/report.pdf",
+          "permalink": "https://madotest.slack.com/files/U01AAAAAA/F0FILEFIL1/report.pdf"
+        }
+      ],
+      "upload": true
+    },
+    {
+      "type": "message",
+      "subtype": "message_changed",
+      "hidden": true,
+      "ts": "1792432850.000050",
+      "message": {"type": "message", "user": "U01AAAAAA", "text": "edited", "ts": "1792432700.000001"}
+    },
+    {
+      "type": "message",
+      "user": "U01AAAAAA",
+      "text": "older than the initial window",
+      "ts": "1792340000.000001"
+    }
+  ],
+  "has_more": false,
+  "pin_count": 0,
+  "response_metadata": {
+    "next_cursor": ""
+  }
+}

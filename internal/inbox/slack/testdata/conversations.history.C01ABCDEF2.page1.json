@@ -1,0 +1,47 @@
+{
+  "ok": true,
+  "messages": [
+    {
+      "type": "message",
+      "user": "U01AAAAAA",
+      "text": "Deploy done, see <https://example.com/run/5|run 5> cc <@U02BBBBBB> and <https://example.com/raw>",
+      "ts": "1792433300.000500",
+      "team": "T0123ABCD"
+    },
+    {
+      "type": "message",
+      "subtype": "channel_join",
+      "user": "U03CCCCCC",
+      "text": "<@U03CCCCCC> has joined the channel",
+      "ts": "1792433250.000400"
+    },
+    {
+      "type": "message",
+      "user": "U02BBBBBB",
+      "text": "Anyone seen <#C01ABCDEF2|general> lately? &lt;3 &amp; thanks",
+      "ts": "1792433100.000300",
+      "thread_ts": "1792433100.000300",
+      "reply_count": 2,
+      "reply_users_count": 2,
+      "reply_users": ["U01AAAAAA", "U03CCCCCC"],
+      "latest_reply": "1792433220.000320",
+      "subscribed": true,
+      "last_read": "1792433220.000320"
+    },
+    {
+      "type": "message",
+      "subtype": "bot_message",
+      "bot_id": "B0BOTBOT1",
+      "text": "",
+      "ts": "1792433050.000250",
+      "attachments": [
+        {"id": 1, "fallback": "Build failed", "title": "Build #11", "title_link": "https://ci.example.com/11", "color": "danger"}
+      ]
+    }
+  ],
+  "has_more": true,
+  "pin_count": 0,
+  "response_metadata": {
+    "next_cursor": "bmV4dF90czoxNzkyNDMzMDAw"
+  }
+}

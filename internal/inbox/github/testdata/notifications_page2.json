@@ -1,0 +1,42 @@
+[
+  {
+    "id": "1003",
+    "unread": true,
+    "reason": "subscribed",
+    "updated_at": "2026-10-17T08:00:00Z",
+    "last_read_at": null,
+    "subject": {
+      "title": "v1.2.0",
+      "url": "{{API}}/repos/acme/tool/releases/555",
+      "latest_comment_url": "{{API}}/repos/acme/tool/releases/555",
+      "type": "Release"
+    },
+    "repository": {
+      "id": 2, "name": "tool", "full_name": "acme/tool", "private": false,
+      "html_url": "https://github.com/acme/tool",
+      "owner": {"login": "acme", "id": 2, "type": "Organization"}
+    },
+    "url": "{{API}}/notifications/threads/1003",
+    "subscription_url": "{{API}}/notifications/threads/1003/subscription"
+  },
+  {
+    "id": "1004",
+    "unread": true,
+    "reason": "comment",
+    "updated_at": "2026-10-16T07:00:00Z",
+    "last_read_at": null,
+    "subject": {
+      "title": "Roadmap for 2027",
+      "url": null,
+      "latest_comment_url": null,
+      "type": "Discussion"
+    },
+    "repository": {
+      "id": 2, "name": "tool", "full_name": "acme/tool", "private": false,
+      "html_url": "https://github.com/acme/tool",
+      "owner": {"login": "acme", "id": 2, "type": "Organization"}
+    },
+    "url": "{{API}}/notifications/threads/1004",
+    "subscription_url": "{{API}}/notifications/threads/1004/subscription"
+  }
+]

@@ -1,0 +1,11 @@
+{
+  "url": "{{API}}/repos/acme/tool/releases/555",
+  "html_url": "https://github.com/acme/tool/releases/tag/v1.2.0",
+  "id": 555,
+  "tag_name": "v1.2.0",
+  "name": "v1.2.0",
+  "draft": false,
+  "prerelease": false,
+  "author": {"login": "dave", "id": 13, "type": "User"},
+  "body": "Bug fixes."
+}

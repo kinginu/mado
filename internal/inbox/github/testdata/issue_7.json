@@ -1,0 +1,10 @@
+{
+  "url": "{{API}}/repos/octo/mado/issues/7",
+  "html_url": "https://github.com/octo/mado/issues/7",
+  "id": 77,
+  "number": 7,
+  "title": "Crash on start",
+  "user": {"login": "carol", "id": 12, "type": "User"},
+  "state": "closed",
+  "body": "mado crashes when hub.toml is empty. cc @octo"
+}

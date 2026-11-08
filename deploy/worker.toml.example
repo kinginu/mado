@@ -1,0 +1,17 @@
+# ~/.config/mado/worker.toml (written by install-worker.sh)
+hub_url = "wss://hub.tailnet.ts.net/ws/worker"
+machine_name = "gpu1"
+token_file = "~/.config/mado/machine.token"   # from `mado enroll`
+project_roots = ["~/work", "~/src"]
+claude_bin = "~/.local/bin/claude"
+tmux_socket = "mado"
+router_listen = "127.0.0.1:8742"      # default; fixed so claude children survive a daemon restart
+# runtime_dir = "/run/user/1000/mado"   # default $XDG_RUNTIME_DIR/mado
+# claude_config_base = "~/.mado"        # CLAUDE_CONFIG_DIR = <base>/claude-<profile> for router profiles
+# spool_dir = "~/.local/state/mado/spool"   # spools + router token files; on disk so they survive a reboot
+# tmux_scope = "auto"                   # auto (systemd-run scope when run by systemd) | always | never
+# spool_retention = "168h"              # spools/token files of sessions the hub reports dead are deleted after this
+# claude_history = false                # ship ~/.claude/projects/*/*.jsonl to the hub, read-only (admins see /history)
+# claude_home = "~/.claude"             # default Claude Code config dir scanned for history
+# jobs = false                          # true: run inbox digest jobs on this machine's subscription login (DESIGN §23.6)
+# job_dir = "~/.local/state/mado/jobs"  # cwd of job sessions (default $XDG_STATE_HOME/mado/jobs), created at start

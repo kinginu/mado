@@ -1,0 +1,35 @@
+{
+  "ok": true,
+  "channels": [
+    {
+      "id": "D0DMDMDM01",
+      "created": 1700000000,
+      "is_im": true,
+      "is_org_shared": false,
+      "user": "U02BBBBBB",
+      "is_user_deleted": false,
+      "priority": 0
+    },
+    {
+      "id": "D0DMDMDM02",
+      "created": 1700000001,
+      "is_im": true,
+      "user": "U0GONEGONE",
+      "is_user_deleted": true
+    },
+    {
+      "id": "G0MPIMMP01",
+      "name": "mpdm-alice--bob--inu-1",
+      "is_channel": false,
+      "is_group": true,
+      "is_im": false,
+      "is_mpim": true,
+      "is_private": true,
+      "created": 1700000002,
+      "is_archived": false
+    }
+  ],
+  "response_metadata": {
+    "next_cursor": ""
+  }
+}

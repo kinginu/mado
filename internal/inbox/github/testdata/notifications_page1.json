@@ -1,0 +1,42 @@
+[
+  {
+    "id": "1001",
+    "unread": true,
+    "reason": "review_requested",
+    "updated_at": "2026-10-19T10:00:00Z",
+    "last_read_at": null,
+    "subject": {
+      "title": "Add the github inbox kind",
+      "url": "{{API}}/repos/octo/mado/pulls/42",
+      "latest_comment_url": "{{API}}/repos/octo/mado/issues/comments/9001",
+      "type": "PullRequest"
+    },
+    "repository": {
+      "id": 1, "name": "mado", "full_name": "octo/mado", "private": false,
+      "html_url": "https://github.com/octo/mado",
+      "owner": {"login": "octo", "id": 1, "type": "User"}
+    },
+    "url": "{{API}}/notifications/threads/1001",
+    "subscription_url": "{{API}}/notifications/threads/1001/subscription"
+  },
+  {
+    "id": "1002",
+    "unread": true,
+    "reason": "mention",
+    "updated_at": "2026-10-18T09:00:00Z",
+    "last_read_at": null,
+    "subject": {
+      "title": "Crash on start",
+      "url": "{{API}}/repos/octo/mado/issues/7",
+      "latest_comment_url": "{{API}}/repos/octo/mado/issues/7",
+      "type": "Issue"
+    },
+    "repository": {
+      "id": 1, "name": "mado", "full_name": "octo/mado", "private": false,
+      "html_url": "https://github.com/octo/mado",
+      "owner": {"login": "octo", "id": 1, "type": "User"}
+    },
+    "url": "{{API}}/notifications/threads/1002",
+    "subscription_url": "{{API}}/notifications/threads/1002/subscription"
+  }
+]
